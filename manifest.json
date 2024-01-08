@@ -1,0 +1,15 @@
+{
+    "name":"Finding Electromagnetic Field",
+    "short_name":"Finding EMF",
+    "start_url":"https://prathampatankar.github.io/ghadyal/",
+    "theme_color": "#ffffff",
+    "display":"standalone",
+    "description":"Electromagnetic Field Detecter Website",
+    "icons":[
+    {
+    "src":"femflogo.svg",
+    "sizes":"512x512",
+    "type":"image/png"
+    }
+  ]
+}
