@@ -10,9 +10,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.8.0/lib/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/addons/p5.sound.js"></script>
-  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
   <link rel=manifest href=manifest.json>
   <title>finding electromagneticfield</title>
   <style>
@@ -329,7 +329,7 @@
     //     // (update your browser)
     //   }
     let classifier;
-    let label = 'listening...';
+    let label = 'listening...' ;
     let soundModel = 'https://storage.googleapis.com/tm-model/omoJSlONP/model.json';
     function preload() {
       classifier = ml5.soundClassifier(soundModel);
@@ -353,7 +353,8 @@
       cnv.parent('myCanvas');
       mic = new p5.AudioIn();
       mic.start();
-      classifyAudio()
+      classifier.classifyStart(gotResult)
+      // classifyAudio()
     }
     function draw() {
       background('ffffff')
@@ -374,7 +375,7 @@
       arcanimate = random(1, 140);
       arcanimate2 = random(220, 320);
       // roatation = 0;
-      if (label == 'Left' && lvl < 20) {
+      if (label == 'Left') {
         document.getElementById("reading").innerHTML = label;
         $('.rotate').animate(
           { deg: arcanimate2 },
@@ -385,7 +386,7 @@
             }
           }
         );
-      } else if (label == 'Right' && lvl < 20) {
+      } else if (label) {
         document.getElementById("reading").innerHTML = label;
         $('.rotate').animate(
           { deg: arcanimate },
@@ -396,20 +397,21 @@
             }
           }
         );
-      } else if (lvl >= 20) {
+      } else if (lvl) {
         document.getElementById("reading").innerHTML = "ahead";
       }
     }
-    function classifyAudio() {
-      classifier.classify(gotResult);
-    }
+    // function classifyAudio() {
+    //   classifier.classify(gotResult);
+    // }
     function gotResult(error, results) {
       if (error) {
         console.error(error);
+        label = error[0].label;
         return;
       }
-      // console.log(results);
       label = results[0].label;
+      // console.log(label);
     }
     let rdeg = 180;
     $('#rotate').click(function () {
