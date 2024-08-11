@@ -1,213 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="femflogo.svg"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <!-- <link rel="stylesheet" href="index.css">  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/p5@1.8.0/lib/p5.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/addons/p5.sound.js"></script>
-<script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
-<link rel=manifest href=manifest.json>    
-<title>finding electromagneticfield</title>
-    <style>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="femflogo.svg" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- <link rel="stylesheet" href="index.css">  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.8.0/lib/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/addons/p5.sound.js"></script>
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  <link rel=manifest href=manifest.json>
+  <title>finding electromagneticfield</title>
+  <style>
+    body {
+      overflow-x: hidden;
+      background-color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      width: auto !important;
+      margin: 16px;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh*2);
+    }
+
+    .Heading {
+      font-weight: 500;
+    }
+
+    .finding {
+      color: #A4A4A4;
+      font-size: 18px;
+    }
+
+    .electromagneticfield {
+      width: calc(100%-32px);
+      height: auto;
+      font-size: 28px;
+      overflow-wrap: break-word;
+      /* overflow-wrap: break-word; */
+    }
+
+    .Footer {
+      /* position: absolute; */
+      justify-self: flex-end;
+      align-self: flex-end;
+      bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      width: 100% !important;
+      margin-top: auto;
+    }
+
+    .bottomhorizontal {
+      /* justify-self: flex-end;
+        align-self: flex-end; */
+      display: flex;
+      justify-content: space-between;
+      align-content: space-between;
+      margin-bottom: 26px;
+    }
+
+    #speaker {
+      position: relative;
+      margin-left: auto;
+    }
+
+    /* #speaker {
+        margin-right: 16px;
+      } */
+    button {
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 50px;
+      outline: none;
+      background: none;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 18px;
+      display: flex;
+      gap: 10px;
+      padding: 16px;
+      background-color: #F7F7F7;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:visited {
+      text-decoration: none;
+    }
+
+    #myCanvas {
+      display: none;
+    }
+
+    #reading {
+      align-self: center;
+      /* transform: translate(-50%,-50%); */
+      font-weight: 500;
+      font-size: 28px;
+    }
+
+    .direction {
+      position: relative;
+      top: 50vh;
+      left: 50vw;
+      transform: translate(-50%, -50%);
+    }
+
+    #pin {
+      align-self: center;
+      aspect-ratio: 1;
+      width: 40px;
+      margin-bottom: -25px;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    #ring {
+      /* opacity: 0; */
+    }
+
+    .flex1 {
+      display: flex;
+      flex-direction: column;
+      /* justify-content: space-between; */
+      height: 100vh;
+    }
+
+    .rotate {
+      margin-top: 15vh;
+      justify-self: center;
+      display: flex;
+      flex-direction: column;
+      border-radius: 500px;
+      /* animation: circular 5s infinite; */
+
+    }
+
+    /* @keyframes circular {
+        100% {transform: rotate(360deg);}
+      } */
+    .flex2 {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-weight: 500;
+      margin-top: auto;
+    }
+
+    .getstarted {
+      font-size: 28px;
+      margin-top: 22px;
+    }
+
+    .steps {
+      margin-top: 22px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      size: 18px;
+
+    }
+
+    .doc,
+    .git {
+      display: flex;
+      gap: 8px;
+      color: black;
+    }
+
+    .git {
+      margin-top: 6px;
+    }
+
+    .vik {
+      align-self: center;
+      margin-top: 22px;
+      color: #8A8A8A;
+      font-size: 11px;
+    }
+
+    .poster {
+      align-self: center;
+      margin-top: auto;
+      aspect-ratio: 1;
+      width: auto !important;
+      /* max-width: 300px; */
+      margin: 0 50px;
+    }
+
+    .poster img {
+      align-self: center;
+      margin-top: auto;
+      aspect-ratio: 1;
+      width: 100% !important;
+      /* max-width: 300px; */
+      /* margin: 0 50px; */
+    }
+
+    p {
+      margin: 0;
+    }
+
+    #rotate {
+      border-radius: 50px;
+      cursor: pointer;
+      padding: 16px;
+      background-color: #F7F7F7;
+      margin-bottom: 16px;
+      margin-right: auto;
+    }
+
+    @media screen and (min-width: 500px) {
       body {
+        width: 500px;
+        padding-left: 25%;
+        padding-right: 25%;
         overflow-x: hidden;
-        background-color: #ffffff;
+        background-color: white;
         font-family: 'Inter', sans-serif;
-        width: auto !important;
-        margin: 16px;
         display: flex;
         flex-direction: column;
         height: calc(100vh*2);
       }
-      .Heading {
-        font-weight: 500;
-      }
-      .finding {
-        color: #A4A4A4;
-        font-size: 18px;
-      }
-      .electromagneticfield {
-        width: calc(100%-32px);
-        height: auto;
-        font-size: 28px;
-        overflow-wrap: break-word;
-        /* overflow-wrap: break-word; */
-      }
-      .Footer {
-        /* position: absolute; */
-        justify-self: flex-end;
-        align-self: flex-end;
-        bottom: 16px;
-        display: flex;
-        flex-direction: column;
-        width: 100% !important;
-        margin-top: auto;
-      }
-      .bottomhorizontal {
-        /* justify-self: flex-end;
-        align-self: flex-end; */
-        display: flex;
-        justify-content: space-between;
-        align-content: space-between;
-        margin-bottom: 26px;
-      }
-      #speaker {
-        position: relative;
-        margin-left: auto;
-      }
-      /* #speaker {
-        margin-right: 16px;
-      } */
-      button {
-        -webkit-appearance: none;
-        appearance: none;
-        cursor: pointer;
-        text-decoration: none;
-        border: none;
-        box-shadow: none;
-        border-radius:50px;
-        outline:none;
-        background:none;
-        font-weight: 500;
-        text-decoration: none;
-        font-size: 18px;
-        display: flex;
-        gap: 10px;
-        padding: 16px;
-        background-color: #F7F7F7;
-      }
-      a {
-        text-decoration: none;
-      }
-      a:visited {
-        text-decoration: none;
-      }
-      #myCanvas {
-        display: none;
-      }
-      #reading {
-        align-self: center;
-        /* transform: translate(-50%,-50%); */
-        font-weight: 500;
-        font-size: 28px;
-      }
-      .direction {
-        position: relative;
-        top: 50vh;
-        left: 50vw;
-        transform: translate(-50%,-50%);
-      }
-      #pin {
-        align-self: center;
-        aspect-ratio: 1;
-        width: 40px;
-        margin-bottom: -25px;
-        z-index: 1;
-        overflow: hidden;
-      }
-      #ring {
-       /* opacity: 0; */
-      }
-      .flex1 {
-        display: flex;
-        flex-direction: column;
-        /* justify-content: space-between; */
-        height: 100vh;
-      }
-      .rotate {
-        margin-top: 15vh;
-        justify-self: center;
-        display: flex;
-        flex-direction: column;
-        border-radius: 500px;
-        /* animation: circular 5s infinite; */
-        
-      }
-      /* @keyframes circular {
-        100% {transform: rotate(360deg);}
-      } */
-      .flex2 {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        font-weight: 500;
-        margin-top: auto;
-      }
-      .getstarted {
-        font-size: 28px;
-        margin-top: 22px;
-      }
-      .steps {
-        margin-top: 22px;
-        margin-bottom: 22px;
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        size: 18px;
-        
-      }
-      .doc,.git {
-        display: flex;
-        gap: 8px;
-        color: black;
-      }
-      .git {
-        margin-top: 6px;
-      }
-      .vik {
-        align-self: center;
-        margin-top: 22px;
-        color: #8A8A8A;
-        font-size: 11px;
-      }
-      .poster {
-        align-self: center;
-        margin-top: auto;
-        aspect-ratio: 1;
-        width: auto !important;
-        /* max-width: 300px; */
-        margin: 0 50px;
-      }
-      .poster img {
-        align-self: center;
-        margin-top: auto;
-        aspect-ratio: 1;
-        width: 100% !important;
-        /* max-width: 300px; */
-        /* margin: 0 50px; */
-      }
-      p {
-        margin: 0;
-      }
-      #rotate {
-        border-radius: 50px;
-        cursor: pointer;
-        padding: 16px;
-        background-color: #F7F7F7;
-        margin-bottom: 16px;
-        margin-right: auto;
-      }
-      @media screen and (min-width: 500px) {
-        body {
-          width: 500px;
-          padding-left: 25%;
-          padding-right: 25%;
-          overflow-x: hidden;
-          background-color: white;
-          font-family: 'Inter', sans-serif;
-          display: flex;
-          flex-direction: column;
-          height: calc(100vh*2);
-        }
-      }
-    </style>
-  </head>
+    }
+  </style>
+</head>
+
 <body>
   <!-- <div id="logo" >
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><lottie-player src="https://assets6.lottiefiles.com/packages/lf20_vkarrq5n.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop  autoplay></lottie-player>
@@ -219,26 +249,28 @@
       <div class="finding">finding</div>
       <div class="electromagneticfield">ELECTROMAGNETIC-FIELD</div>
       <!-- <div class="right grid-item"><button class="btn1" id="open"><img class="image1" src="sidebarbutton.svg"></button></div> -->
-      </div>
-  <!-- <div class="grid-container">
+    </div>
+    <!-- <div class="grid-container">
       <div class="heading2 ending   left grid-item" id="ending"></div>
       <div class="heading2 right  l grid-item" id="reading"></div>
   </div> -->
-  <div class="rotate">
-    <img id="pin" src="pin.svg" alt="">
-    <img id="ring" src="ring.svg" alt="">
-  </div>
-  <div id="myCanvas"></div>
-  <div class="Footer">
-  <div id="reading"></div>
-  <!-- <button type="button" onclick="init()">Start</button>
+    <div class="rotate">
+      <img id="pin" src="pin.svg" alt="">
+      <img id="ring" src="ring.svg" alt="">
+    </div>
+    <div id="myCanvas"></div>
+    <div class="Footer">
+      <div id="reading"></div>
+      <!-- <button type="button" onclick="init()">Start</button>
   <div id="label-container"></div> -->
-  <div id="rotate"><img src="rotate.svg"></div>
-  <div class="bottomhorizontal">
-  <div id="download"><a id="download1" download="reading.csv"><button class="btn1" id="download2"><img class="image1" src="downloadicon.svg">.csv</button></a></div>
-  <div id="speaker"><button class="btn1" id="speaker"><img class="image1" id="img1" src="speaker.svg"></button></div>
-  </div>
-  </div>
+      <div id="rotate"><img src="rotate.svg"></div>
+      <div class="bottomhorizontal">
+        <div id="download"><a id="download1" download="reading.csv"><button class="btn1" id="download2"><img
+                class="image1" src="downloadicon.svg">.csv</button></a></div>
+        <div id="speaker"><button class="btn1" id="speaker"><img class="image1" id="img1" src="speaker.svg"></button>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="flex2">
     <img class="poster" src="poster.png">
@@ -252,7 +284,7 @@
     <a class="git" href="">View Code<img src="git.svg"></a>
     <div class="vik">Made in Vikhroli</div>
   </div>
-<!-- <div id="modalcontainer">
+  <!-- <div id="modalcontainer">
       <div class="grid-container topsection">
         <div class="heading2 left grid-item">
           <a href="index.html">home</a></div>
@@ -263,185 +295,183 @@
       <div class="heading2"><a href="diyinductormic.html">DIY inductor mic</a></div>
       <div class="heading2"><a href="credits.html">credits</a></div>
       </div> -->
-      
-<!-- <marquee width="100%" direction="left" height="100px">
+
+  <!-- <marquee width="100%" direction="left" height="100px">
 • please use inductor mic • click anywhere to start • wait 10 seconds before downloading first file •
 </marquee> -->
-</div>
-<div id="loading"></div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-  // $(window).on('load', function () {
-  //   setTimeout(function(){
-  //     $('#loading').hide();
-  //   },2000);
-  // })
-  // $(window).on('load', function () {
-  //   setTimeout(function(){
-  //     $('#logo').hide();
-  //   },2000);
-  // })
-  // const audioCtx = new AudioContext();
-  // if (navigator.mediaDevices) {
-  //   navigator.mediaDevices.getUserMedia({"audio": true}).then((stream) => {
-  //     const microphone = audioCtx.createMediaStreamSource(stream);
-  //     console.log(stream)
-  //     // `microphone` can now act like any other AudioNode
-  //   }).catch((err) => {
-  //     // browser unable to access microphone
-  //     // (check to see if microphone is attached)
-  //   });
-  //   } else {
-  //     // browser unable to access media devices
-  //     // (update your browser)
-  //   }
-  let classifier;
-  let label = 'listening...';
-  let soundModel = 'https://teachablemachine.withgoogle.com/models/omoJSlONP/';
-  function preload() {
-    classifier = ml5.soundClassifier(soundModel + 'model.json');
-  }
-  function touchStarted() 
-            {
-              getAudioContext().resume();
-            }
-            var mic;
-            var vol;
-            var offset = 0;
-            var strum = 1;
-            let object;
-            let lvl;
-            let wav;
-            let a;
-            let rotation;
-            let arcanimate;
-            let arcanimate2;
-            // let classifier;
-            // let label;
-            // function preload() {
-            //       classifier = ml5.soundClassifier('EMFMODEL');
-            //     }
-            function setup () {
-                let cnv = createCanvas(windowWidth,40);
-                cnv.parent('myCanvas');
-                mic = new p5.AudioIn();
-                mic.start();
-                classifier.classify(gotResult);
-            }
-            function draw () {
-                background('ffffff')
-                vol = mic.getLevel();
-                let one = 1;
-                lvl = map(vol,0,1,1,100);
-                // if (a=>2) {document.getElementById("reading").innerHTML = 'hih';
-                // document.getElementById("reading").innerHTML = 'hih';
-                // } else {
-                // document.getElementById("reading").innerHTML = 'lou';
-                // }
-                $(document).ready(function(){
-                  setInterval(() => {
-                  $('body').trigger('click');
-                }, 5000);
-                });
-
-                arcanimate = random(1,140);
-                arcanimate2 = random(220,320);
-                // roatation = 0;
-                if (label == 'Left' && lvl < 20){
-                  document.getElementById("reading").innerHTML = label;
-                  $('.rotate').animate(
-                      { deg: arcanimate2 },
-                      {
-                        duration: 50,
-                        step: function(now) {
-                          $(this).css({ transform: 'rotate(' + now + 'deg)' });
-                        }
-                      }
-                    );
-                }else if (label == 'Right' && lvl < 20){
-                  document.getElementById("reading").innerHTML = label;
-                  $('.rotate').animate(
-                      { deg: arcanimate },
-                      {
-                        duration: 50,
-                        step: function(now) {
-                          $(this).css({ transform: 'rotate(' + now + 'deg)' });
-                        }
-                      }
-                    );
-                }else if (lvl >= 20) {
-                  document.getElementById("reading").innerHTML = "ahead";
-                }
-            }
-            function gotResult(error, results) {
-              if (error) {
-                console.error(error);
-                return;
-              }
-              // console.log(results);
-              label = results[0].label;
-            }
-            let rdeg = 180;
-            $('#rotate').click(function() {
-              $('body').css({'transform' : 'rotate('+ rdeg +'deg)'});
-              rdeg = rdeg + 180;
-            })
-            let seconds = 0;
-            let time1 = [];
-            let reading1 = [];
-            let data1 = [];
-            let data2 = [];
-            let blob1;
-            data1 = [["second","reading"]];
-            setInterval(() => {
-                    if (a === undefined) {
-                      a = 1;
-                    } else {
-                      a=a;
-                    }
-                    seconds = 1 + seconds;
-                    data1.push([seconds,a]);
-                    data2 = [data1.join("\r\n")];
-                    blob1 = new Blob([data2]);
-                    download1.href = URL.createObjectURL(blob1);
-              
-            }, 1000);
-               
-                    
-  window.onload=function(){
-  const speaker = document.getElementById('speaker');
-  const download1 = document.getElementById('download1')
-  // const notice1 = document.getElementById('notice1') 
-  const open = document.getElementById('open');
-  const modalcontainer = document.getElementById('modalcontainer');
-  const close = document.getElementById('close');
-  // notice1.addEventListener('click',()=>{
-  //   alert('never use diy inductor with devices which draws power directly from the wall, this diy mic is suitable only for battery powered devices i.e. smartphone')
-  // });
-  // open.addEventListener('click', () => {
-  //   modalcontainer.classList.add('show');
-  //   modalcontainer.classList.remove('hide');
-  // });
-  // close.addEventListener('click', () => {
-  //   modalcontainer.classList.remove('show');
-  //   modalcontainer.classList.add('hide');
-  // });
-  let micstate = 0;
-  speaker.addEventListener('click', () => {
-    if (micstate == 0) {
-      mic.connect();
-      micstate = micstate+1;
-      document.getElementById('img1').src='speakermute.svg';
-    } else {
-      mic.disconnect();
-      micstate = micstate-1;
-      document.getElementById('img1').src='speaker.svg';
+  </div>
+  <div id="loading"></div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    // $(window).on('load', function () {
+    //   setTimeout(function(){
+    //     $('#loading').hide();
+    //   },2000);
+    // })
+    // $(window).on('load', function () {
+    //   setTimeout(function(){
+    //     $('#logo').hide();
+    //   },2000);
+    // })
+    // const audioCtx = new AudioContext();
+    // if (navigator.mediaDevices) {
+    //   navigator.mediaDevices.getUserMedia({"audio": true}).then((stream) => {
+    //     const microphone = audioCtx.createMediaStreamSource(stream);
+    //     console.log(stream)
+    //     // `microphone` can now act like any other AudioNode
+    //   }).catch((err) => {
+    //     // browser unable to access microphone
+    //     // (check to see if microphone is attached)
+    //   });
+    //   } else {
+    //     // browser unable to access media devices
+    //     // (update your browser)
+    //   }
+    let classifier;
+    let label = 'listening...';
+    let soundModel = 'https://storage.googleapis.com/tm-model/omoJSlONP/model.json';
+    function preload() {
+      classifier = ml5.soundClassifier(soundModel);
     }
-  })
-  }
-  //test1
-  //test2
-</script>
+    function touchStarted() {
+      getAudioContext().resume();
+    }
+    var mic;
+    var vol;
+    var offset = 0;
+    var strum = 1;
+    let object;
+    let lvl;
+    let wav;
+    let a;
+    let rotation;
+    let arcanimate;
+    let arcanimate2;
+    function setup() {
+      let cnv = createCanvas(windowWidth, 40);
+      cnv.parent('myCanvas');
+      mic = new p5.AudioIn();
+      mic.start();
+      classifyAudio()
+    }
+    function draw() {
+      background('ffffff')
+      vol = mic.getLevel();
+      let one = 1;
+      lvl = map(vol, 0, 1, 1, 100);
+      // if (a=>2) {document.getElementById("reading").innerHTML = 'hih';
+      // document.getElementById("reading").innerHTML = 'hih';
+      // } else {
+      // document.getElementById("reading").innerHTML = 'lou';
+      // }
+      $(document).ready(function () {
+        setInterval(() => {
+          $('body').trigger('click');
+        }, 5000);
+      });
+
+      arcanimate = random(1, 140);
+      arcanimate2 = random(220, 320);
+      // roatation = 0;
+      if (label == 'Left' && lvl < 20) {
+        document.getElementById("reading").innerHTML = label;
+        $('.rotate').animate(
+          { deg: arcanimate2 },
+          {
+            duration: 50,
+            step: function (now) {
+              $(this).css({ transform: 'rotate(' + now + 'deg)' });
+            }
+          }
+        );
+      } else if (label == 'Right' && lvl < 20) {
+        document.getElementById("reading").innerHTML = label;
+        $('.rotate').animate(
+          { deg: arcanimate },
+          {
+            duration: 50,
+            step: function (now) {
+              $(this).css({ transform: 'rotate(' + now + 'deg)' });
+            }
+          }
+        );
+      } else if (lvl >= 20) {
+        document.getElementById("reading").innerHTML = "ahead";
+      }
+    }
+    function classifyAudio() {
+      classifier.classify(gotResult);
+    }
+    function gotResult(error, results) {
+      if (error) {
+        console.error(error);
+        return;
+      }
+      // console.log(results);
+      label = results[0].label;
+    }
+    let rdeg = 180;
+    $('#rotate').click(function () {
+      $('body').css({ 'transform': 'rotate(' + rdeg + 'deg)' });
+      rdeg = rdeg + 180;
+    })
+    let seconds = 0;
+    let time1 = [];
+    let reading1 = [];
+    let data1 = [];
+    let data2 = [];
+    let blob1;
+    data1 = [["second", "reading"]];
+    setInterval(() => {
+      if (a === undefined) {
+        a = 1;
+      } else {
+        a = a;
+      }
+      seconds = 1 + seconds;
+      data1.push([seconds, a]);
+      data2 = [data1.join("\r\n")];
+      blob1 = new Blob([data2]);
+      download1.href = URL.createObjectURL(blob1);
+
+    }, 1000);
+
+
+    window.onload = function () {
+      const speaker = document.getElementById('speaker');
+      const download1 = document.getElementById('download1')
+      // const notice1 = document.getElementById('notice1') 
+      const open = document.getElementById('open');
+      const modalcontainer = document.getElementById('modalcontainer');
+      const close = document.getElementById('close');
+      // notice1.addEventListener('click',()=>{
+      //   alert('never use diy inductor with devices which draws power directly from the wall, this diy mic is suitable only for battery powered devices i.e. smartphone')
+      // });
+      // open.addEventListener('click', () => {
+      //   modalcontainer.classList.add('show');
+      //   modalcontainer.classList.remove('hide');
+      // });
+      // close.addEventListener('click', () => {
+      //   modalcontainer.classList.remove('show');
+      //   modalcontainer.classList.add('hide');
+      // });
+      let micstate = 0;
+      speaker.addEventListener('click', () => {
+        if (micstate == 0) {
+          mic.connect();
+          micstate = micstate + 1;
+          document.getElementById('img1').src = 'speakermute.svg';
+        } else {
+          mic.disconnect();
+          micstate = micstate - 1;
+          document.getElementById('img1').src = 'speaker.svg';
+        }
+      })
+    }
+    //test1
+    //test2
+  </script>
 </body>
+
 </html>
